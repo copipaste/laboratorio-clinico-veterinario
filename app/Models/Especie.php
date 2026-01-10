@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Especie extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'estado',
+    ];
+
+    protected $casts = [
+        'estado' => 'boolean',
+    ];
+
+    /**
+     * Relación con muestras
+     */
+    public function muestras(): HasMany
+    {
+        return $this->hasMany(Muestra::class);
+    }
+
+    /**
+     * Relación con rangos de referencia
+     */
+    public function rangosReferencia(): HasMany
+    {
+        return $this->hasMany(RangoReferencia::class);
+    }
+}
