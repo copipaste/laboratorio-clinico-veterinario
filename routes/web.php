@@ -13,6 +13,9 @@ Route::view('dashboard', 'dashboard')
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/sucursales', 'sucursales.index')
         ->name('sucursales.index');
+    
+    Route::view('/veterinarias', 'veterinarias.index')
+        ->name('veterinarias.index');
 });
 
 require __DIR__.'/settings.php';
