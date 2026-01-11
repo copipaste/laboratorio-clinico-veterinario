@@ -1,70 +1,7 @@
 <div>
     {{-- Mensajes toast en esquina superior derecha --}}
-    @if (session()->has('mensaje'))
-        <div 
-            x-data="{ show: true }" 
-            x-show="show" 
-            x-init="setTimeout(() => show = false, 5000)"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 transform translate-x-full"
-            x-transition:enter-end="opacity-100 transform translate-x-0"
-            x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="opacity-100 transform translate-x-0"
-            x-transition:leave-end="opacity-0 transform translate-x-full"
-            class="fixed right-4 top-20 z-50 w-96 max-w-[calc(100vw-2rem)] rounded-lg bg-green-50 p-4 shadow-lg ring-1 ring-green-200 dark:bg-green-900/20 dark:ring-green-800"
-        >
-            <div class="flex items-start justify-between gap-3">
-                <div class="flex items-start gap-3">
-                    <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                    </div>
-                    <div class="flex-1">
-                        <p class="text-sm font-medium text-green-800 dark:text-green-400">{{ session('mensaje') }}</p>
-                    </div>
-                </div>
-                <button @click="show = false" class="flex-shrink-0 text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300">
-                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    @endif
-
-    @if (session()->has('error'))
-        <div 
-            x-data="{ show: true }" 
-            x-show="show" 
-            x-init="setTimeout(() => show = false, 5000)"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 transform translate-x-full"
-            x-transition:enter-end="opacity-100 transform translate-x-0"
-            x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="opacity-100 transform translate-x-0"
-            x-transition:leave-end="opacity-0 transform translate-x-full"
-            class="fixed right-4 top-20 z-50 w-96 max-w-[calc(100vw-2rem)] rounded-lg bg-red-50 p-4 shadow-lg ring-1 ring-red-200 dark:bg-red-900/20 dark:ring-red-800"
-        >
-            <div class="flex items-start justify-between gap-3">
-                <div class="flex items-start gap-3">
-                    <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                        </svg>
-                    </div>
-                    <div class="flex-1">
-                        <p class="text-sm font-medium text-red-800 dark:text-red-400">{{ session('error') }}</p>
-                    </div>
-                </div>
-                <button @click="show = false" class="flex-shrink-0 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300">
-                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    @endif
+    <x-toast type="success" :message="session('mensaje')" />
+    <x-toast type="error" :message="session('error')" />
 
     {{-- Header de la página --}}
         <div class="mb-6">
@@ -335,14 +272,9 @@
         @if($sucursalAVer)
             <div class="space-y-6">
                 {{-- Encabezado --}}
-                <div class="flex items-start justify-between">
-                    <div>
-                        <flux:heading size="lg" class="mb-1">Detalles de la Sucursal</flux:heading>
-                        <flux:subheading>Información completa de la sucursal</flux:subheading>
-                    </div>
-                    <flux:badge :color="$sucursalAVer->estado ? 'green' : 'red'" size="lg">
-                        {{ $sucursalAVer->estado ? 'Activa' : 'Inactiva' }}
-                    </flux:badge>
+                <div>
+                    <flux:heading size="lg" class="mb-1">Detalles de la Sucursal</flux:heading>
+                    <flux:subheading>Información completa de la sucursal</flux:subheading>
                 </div>
 
                 {{-- Contenido --}}
@@ -394,6 +326,16 @@
                         </label>
                         <p class="text-base text-neutral-900 dark:text-neutral-100">
                             {{ $sucursalAVer->created_at->format('d/m/Y H:i') }}
+                        </p>
+                    </div>
+
+                    {{-- Estado --}}
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                            Estado
+                        </label>
+                        <p class="text-base text-neutral-900 dark:text-neutral-100">
+                            {{ $sucursalAVer->estado ? 'Activa' : 'Inactiva' }}
                         </p>
                     </div>
                 </div>
