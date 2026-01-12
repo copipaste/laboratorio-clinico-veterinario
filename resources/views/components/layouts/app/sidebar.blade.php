@@ -18,10 +18,8 @@
                     <flux:sidebar.item icon="building-office-2" :href="route('sucursales.index')" :current="request()->routeIs('sucursales.*')" wire:navigate>
                         {{ __('Sucursales') }}
                     </flux:sidebar.item>
-<<<<<<< HEAD
                     <flux:sidebar.item icon="rectangle-group" :href="route('especies.index')" :current="request()->routeIs('especies.*')" wire:navigate>
                         {{ __('Especies') }}
-=======
                     <flux:sidebar.item icon="building-storefront" :href="route('veterinarias.index')" :current="request()->routeIs('veterinarias.*')" wire:navigate>
                         {{ __('Veterinarias') }}
                     </flux:sidebar.item>
@@ -33,7 +31,6 @@
                     </flux:sidebar.item>
                     <flux:sidebar.item icon="lock-closed" :href="route('permisos.index')" :current="request()->routeIs('permisos.*')" wire:navigate>
                         {{ __('Permisos') }}
->>>>>>> main
                     </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
