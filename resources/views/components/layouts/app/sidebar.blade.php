@@ -18,6 +18,9 @@
                     <flux:sidebar.item icon="building-office-2" :href="route('sucursales.index')" :current="request()->routeIs('sucursales.*')" wire:navigate>
                         {{ __('Sucursales') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="rectangle-group" :href="route('especies.index')" :current="request()->routeIs('especies.*')" wire:navigate>
+                        {{ __('Especies') }}
+                    </flux:sidebar.item>                    
                     <flux:sidebar.item icon="building-storefront" :href="route('veterinarias.index')" :current="request()->routeIs('veterinarias.*')" wire:navigate>
                         {{ __('Veterinarias') }}
                     </flux:sidebar.item>
