@@ -24,6 +24,9 @@
                     <flux:sidebar.item icon="building-storefront" :href="route('veterinarias.index')" :current="request()->routeIs('veterinarias.*')" wire:navigate>
                         {{ __('Veterinarias') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="beaker" :href="route('muestras.index')" :current="request()->routeIs('muestras.*')" wire:navigate>
+                        {{ __('Muestras') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
 
                 <flux:sidebar.group :heading="__('Administración')" class="grid">

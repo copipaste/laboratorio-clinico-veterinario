@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Picqer\Barcode\BarcodeGeneratorSVG;
 
 class Muestra extends Model
 {
@@ -62,5 +63,19 @@ class Muestra extends Model
     public function analisis(): HasMany
     {
         return $this->hasMany(Analisis::class);
+    }
+
+    /**
+     * Generar código de barras como SVG
+     */
+    public function generarCodigoBarras(): string
+    {
+        $generator = new BarcodeGeneratorSVG();
+        return $generator->getBarcode(
+            $this->codigo_muestra,
+            $generator::TYPE_CODE_128,
+            2,
+            50
+        );
     }
 }

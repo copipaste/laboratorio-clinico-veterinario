@@ -17,8 +17,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/veterinarias', 'veterinarias.index')
         ->name('veterinarias.index');
     
+
+    Route::view('/muestras', 'muestras.index')
+        ->name('muestras.index');
+    
+    // Ruta para imprimir etiqueta de muestra
+    Route::get('/muestras/{muestra}/etiqueta', function (\App\Models\Muestra $muestra) {
+        return view('components.etiqueta-muestra', ['muestra' => $muestra]);
+    })->name('muestras.etiqueta');
+
     Route::view('/especies', 'especies.index')
         ->name('especies.index');
+
     
     Route::view('/roles', 'roles.index')
         ->name('roles.index');
