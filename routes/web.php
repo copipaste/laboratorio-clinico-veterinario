@@ -14,8 +14,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/sucursales', 'sucursales.index')
         ->name('sucursales.index');
     
-    Route::view('/especies', 'especies.index')
-        ->name('especies.index');
     Route::view('/veterinarias', 'veterinarias.index')
         ->name('veterinarias.index');
     
