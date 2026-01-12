@@ -14,8 +14,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/sucursales', 'sucursales.index')
         ->name('sucursales.index');
     
+<<<<<<< HEAD
     Route::view('/especies', 'especies.index')
         ->name('especies.index');
+=======
+    Route::view('/veterinarias', 'veterinarias.index')
+        ->name('veterinarias.index');
+    
+    Route::view('/roles', 'roles.index')
+        ->name('roles.index');
+    
+    Route::view('/permisos', 'permisos.index')
+        ->name('permisos.index');
+>>>>>>> main
 });
 
 require __DIR__.'/settings.php';
