@@ -24,8 +24,11 @@
                     <flux:sidebar.item icon="building-storefront" :href="route('veterinarias.index')" :current="request()->routeIs('veterinarias.*')" wire:navigate>
                         {{ __('Veterinarias') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="beaker" :href="route('muestras.index')" :current="request()->routeIs('muestras.*')" wire:navigate>
+                    <flux:sidebar.item icon="beaker" :href="route('muestras.index')" :current="request()->routeIs('muestras.index')" wire:navigate>
                         {{ __('Muestras') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="viewfinder-circle" :href="route('muestras.escanear')" :current="request()->routeIs('muestras.escanear')" wire:navigate>
+                        {{ __('Escanear Muestra') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
 

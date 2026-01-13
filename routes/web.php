@@ -21,6 +21,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/muestras', 'muestras.index')
         ->name('muestras.index');
     
+    Route::view('/muestras/escanear', 'muestras.escanear')
+        ->name('muestras.escanear');
+    
     // Ruta para imprimir etiqueta de muestra
     Route::get('/muestras/{muestra}/etiqueta', function (\App\Models\Muestra $muestra) {
         return view('components.etiqueta-muestra', ['muestra' => $muestra]);
