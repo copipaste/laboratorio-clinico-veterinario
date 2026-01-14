@@ -20,6 +20,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/especies', 'especies.index')
         ->name('especies.index');
     
+    Route::view('/tipos-analisis', 'tipos-analisis.index')
+        ->name('tipos-analisis.index');
+    
     Route::view('/roles', 'roles.index')
         ->name('roles.index');
     
