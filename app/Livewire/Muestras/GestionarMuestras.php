@@ -231,7 +231,7 @@ class GestionarMuestras extends Component
         $sucursal = Sucursal::find($this->sucursal_id);
         $sucursalCodigo = $sucursal ? str_pad($sucursal->id, 2, '0', STR_PAD_LEFT) : '00';
         
-        $fecha = now()->format('Ymd');
+        $fecha = now()->format('ymd');
         
         // Obtener el último número de muestra del día
         $ultimaMuestra = Muestra::whereDate('created_at', now()->toDateString())
@@ -241,8 +241,8 @@ class GestionarMuestras extends Component
         $numero = $ultimaMuestra ? ($ultimaMuestra->id + 1) : 1;
         $numeroFormateado = str_pad($numero, 4, '0', STR_PAD_LEFT);
         
-        // Formato: SC01-20260111-0001
-        return "SC{$sucursalCodigo}-{$fecha}-{$numeroFormateado}";
+        // Formato: 32-260115-0001 (sin letra inicial)
+        return "{$sucursalCodigo}-{$fecha}-{$numeroFormateado}";
     }
 
     /**

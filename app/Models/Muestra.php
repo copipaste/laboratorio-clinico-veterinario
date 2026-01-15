@@ -71,11 +71,33 @@ class Muestra extends Model
     public function generarCodigoBarras(): string
     {
         $generator = new BarcodeGeneratorSVG();
-        return $generator->getBarcode(
+        // El tamaño final se controla en CSS (la salida es vectorial)
+        $svg = $generator->getBarcode(
             $this->codigo_muestra,
             $generator::TYPE_CODE_128,
-            2,
-            50
+            1, //  ancho de barra
+            80 //  alto de la barra
         );
+
+        // Agregar viewBox para que el SVG escale correctamente por CSS
+        preg_match('/width="([^"]+)"/', $svg, $widthMatch);
+        preg_match('/height="([^"]+)"/', $svg, $heightMatch);
+        $width = floatval($widthMatch[1] ?? 0);
+        $height = floatval($heightMatch[1] ?? 0);
+
+        if ($width > 0 && $height > 0 && !str_contains($svg, 'viewBox=')) {
+            $svg = preg_replace(
+                '/<svg\b([^>]*)>/',
+                '<svg$1 viewBox="0 0 ' . $width . ' ' . $height . '" preserveAspectRatio="xMidYMid meet">',
+                $svg,
+                1
+            );
+        } elseif (str_contains($svg, 'preserveAspectRatio=')) {
+            $svg = preg_replace('/preserveAspectRatio="[^"]*"/', 'preserveAspectRatio="xMidYMid meet"', $svg, 1);
+        } else {
+            $svg = preg_replace('/<svg\b([^>]*)>/', '<svg$1 preserveAspectRatio="xMidYMid meet">', $svg, 1);
+        }
+
+        return $svg;
     }
 }
