@@ -75,7 +75,7 @@ class Muestra extends Model
         $svg = $generator->getBarcode(
             $this->codigo_muestra,
             $generator::TYPE_CODE_128,
-            1, //  ancho de barra
+            0.8, //  ancho de barra
             80 //  alto de la barra
         );
 
