@@ -71,12 +71,12 @@ class Muestra extends Model
     public function generarCodigoBarras(): string
     {
         $generator = new BarcodeGeneratorSVG();
-        // El tamaño final se controla en CSS (la salida es vectorial)
+        // Parámetros optimizados para impresora térmica 203 DPI
         $svg = $generator->getBarcode(
             $this->codigo_muestra,
             $generator::TYPE_CODE_128,
-            1.2, //  ancho de barra
-            80 //  alto de la barra
+            2.0, //  ancho de barra optimizado para 203 DPI
+            65 //  altura aumentada para mejor lectura del escáner
         );
 
         // Agregar viewBox para que el SVG escale correctamente por CSS

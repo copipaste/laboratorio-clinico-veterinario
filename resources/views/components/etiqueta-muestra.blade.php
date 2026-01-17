@@ -27,71 +27,66 @@
             width: 30mm;
             height: 20mm;
             display: flex;
-            flex-direction: row;
-            background: white; /* CORREGIDO: Quitamos el rojo */
-            overflow: hidden; /* Evita que si algo se sale, cree una segunda página */
+            flex-direction: column; /* Cambiado a columna para orientación horizontal del barcode */
+            background: white;
+            padding: 1mm; /* Borde de 1mm alrededor de toda la etiqueta */
+            box-sizing: border-box; /* Asegura que el padding esté incluido en las dimensiones */
         }
         
-        /* COLUMNA DEL CÓDIGO DE BARRAS 
-           Aquí controlamos la alineación horizontal del bloque rotado.
-        */
+        /* SECCIÓN DEL CÓDIGO DE BARRAS (SUPERIOR) */
         .barcode-section {
-            width: 14mm; /* Le damos un poco más de espacio */
-            height: 20mm;
-            display: flex;
-            
-            /* CENTRADO VERTICAL (eje Y) */
-            align-items: center; 
-            
-            /* ALINEACIÓN HORIZONTAL (eje X) */
-            /* Si quieres que se pegue a la derecha (hacia el texto), usa flex-end */
-            /* Si quieres que se pegue a la izquierda (borde papel), usa flex-start */
-            justify-content: center; 
-            
-            background: white; /* CORREGIDO: Quitamos el verde */
-        }
-
-        /* ENVOLTORIO QUE ROTA */
-        .barcode-wrap {
-            width: 16mm; /* Ancho visual tras rotar */
-            height: 12mm; /* Alto visual tras rotar */
+            width: 100%;
+            height: 11mm; /* Espacio para el código horizontal */
             display: flex;
             align-items: center;
             justify-content: center;
-            
-            /* Rotación */
-            transform: rotate(90deg);
-            /* Importante: Mantenerlo en el centro para no perder referencia */
-            transform-origin: center;
-            
-            background: transparent; /* CORREGIDO: Quitamos el magenta */
+            background: white;
+        }
+
+        /* ENVOLTORIO DEL CÓDIGO DE BARRAS */
+        .barcode-wrap {
+            width: 26mm; /* Ancho limitado para respetar márgenes (28mm - 2mm de margen interno) */
+            height: 9mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
         }
         
-        /* COLUMNA DE INFORMACIÓN */
+        /* ESTILOS PARA EL SVG DEL CÓDIGO DE BARRAS */
+        .barcode-wrap svg {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 26mm;
+            max-height: 9mm;
+        }
+        
+        /* SECCIÓN DE INFORMACIÓN (INFERIOR) */
         .info-section {
-            width: 16mm; /* Resto del espacio */
-            height: 20mm;
+            width: 100%;
+            height: 5mm; /* Espacio restante */
             display: flex;
-            flex-direction: column;
+            flex-direction: row; /* Texto en horizontal */
             justify-content: center;
-            align-items: center; /* Centrado horizontal del texto */
+            align-items: center;
             text-align: center;
-            padding-right: 1mm; /* Margen de seguridad derecho */
+            gap: 3mm; /* Espacio entre LABVET y el código */
         }
         
         .titulo {
-            font-size: 8pt; /* Subido un poco para legibilidad */
-            font-weight: 900; /* Extra bold para térmica */
+            font-size: 8pt;
+            font-weight: 900;
             color: black;
-            margin-bottom: 2mm;
             text-transform: uppercase;
+            line-height: 1;
         }
         
         .codigo {
-            font-size: 6pt; /* 4.5pt es muy arriesgado, probamos con 6pt */
+            font-size: 7pt;
             font-weight: bold;
-            font-family: 'Courier New', monospace; /* Fuente monoespaciada ayuda a leer códigos */
+            font-family: 'Courier New', monospace;
             color: black;
+            line-height: 1;
         }
         
         /* REGLAS DE IMPRESIÓN */
