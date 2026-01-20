@@ -26,7 +26,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Ruta para imprimir etiqueta de muestra
     Route::get('/muestras/{muestra}/etiqueta', function (\App\Models\Muestra $muestra) {
-        return view('components.etiqueta-muestra', ['muestra' => $muestra]);
+        return response()
+            ->view('components.etiqueta-muestra', ['muestra' => $muestra])
+            ->header('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     })->name('muestras.etiqueta');
 
     // Ruta para registrar resultados de análisis

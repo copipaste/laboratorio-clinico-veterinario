@@ -85,17 +85,21 @@ class Muestra extends Model
         $width = floatval($widthMatch[1] ?? 0);
         $height = floatval($heightMatch[1] ?? 0);
 
+        // Generar ID único basado en el código de muestra para evitar problemas de caché
+        $uniqueId = 'barcode-' . $this->codigo_muestra . '-' . uniqid();
+
         if ($width > 0 && $height > 0 && !str_contains($svg, 'viewBox=')) {
             $svg = preg_replace(
                 '/<svg\b([^>]*)>/',
-                '<svg$1 viewBox="0 0 ' . $width . ' ' . $height . '" preserveAspectRatio="xMidYMid meet">',
+                '<svg$1 id="' . $uniqueId . '" viewBox="0 0 ' . $width . ' ' . $height . '" preserveAspectRatio="xMidYMid meet">',
                 $svg,
                 1
             );
         } elseif (str_contains($svg, 'preserveAspectRatio=')) {
             $svg = preg_replace('/preserveAspectRatio="[^"]*"/', 'preserveAspectRatio="xMidYMid meet"', $svg, 1);
+            $svg = preg_replace('/<svg\b([^>]*)>/', '<svg$1 id="' . $uniqueId . '">', $svg, 1);
         } else {
-            $svg = preg_replace('/<svg\b([^>]*)>/', '<svg$1 preserveAspectRatio="xMidYMid meet">', $svg, 1);
+            $svg = preg_replace('/<svg\b([^>]*)>/', '<svg$1 id="' . $uniqueId . '" preserveAspectRatio="xMidYMid meet">', $svg, 1);
         }
 
         return $svg;

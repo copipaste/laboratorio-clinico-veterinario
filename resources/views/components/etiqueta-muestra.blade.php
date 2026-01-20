@@ -9,6 +9,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Etiqueta - {{ $muestra->codigo_muestra }}</title>
     <style>
         /* RESET BÁSICO */
@@ -117,6 +120,23 @@
     </style>
 </head>
 <body>
+    <script>
+        // Forzar recarga si la página fue cacheada
+        (function() {
+            // Verificar si la página fue cargada desde caché
+            if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
+                // Forzar recarga
+                window.location.reload(true);
+            }
+            
+            // Prevenir cualquier caché adicional
+            window.addEventListener('pageshow', function(event) {
+                if (event.persisted) {
+                    window.location.reload(true);
+                }
+            });
+        })();
+    </script>
     <div class="etiqueta">
         
         {{-- SECCIÓN BARCODE (IZQUIERDA) --}}
